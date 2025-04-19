@@ -38,7 +38,7 @@ const EstadoAnimo = () => {
         <div className="mb-4">
           <label className="font-semibold">Estado de ánimo:</label>
           <div className="flex flex-col mt-2">
-            {["Feliz", "Triste", "Ansioso", "Relajado"].map((op) => (
+            {["Feliz 😊", "Triste 😢", "Ansioso 😰", "Relajado 😌", "Molesto 😡"].map((op) => (
               <label key={op} className="inline-flex items-center mb-1">
                 <input
                   type="radio"
@@ -57,7 +57,7 @@ const EstadoAnimo = () => {
         <div className="mb-4">
           <label className="font-semibold">Nivel de energía:</label>
           <div className="flex flex-col mt-2">
-            {["Alta", "Media", "Baja"].map((op) => (
+            {["Alta 😝", "Media 🫠", "Baja 😴"].map((op) => (
               <label key={op} className="inline-flex items-center mb-1">
                 <input
                   type="radio"
@@ -76,7 +76,7 @@ const EstadoAnimo = () => {
         <div className="mb-4">
           <label className="font-semibold">Color que prefieres hoy:</label>
           <div className="flex flex-col mt-2">
-            {["Rojo", "Azul", "Negro", "Amarillo", "Verde"].map((op) => (
+            {["Rojo 🔴", "Azul 🔵", "Negro ⚫️", "Amarillo 🟡", "Verde 🟢"].map((op) => (
               <label key={op} className="inline-flex items-center mb-1">
                 <input
                   type="radio"
