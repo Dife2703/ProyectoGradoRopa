@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./services/firebase";
+import SeleccionPrendas from "./pages/SeleccionPrendas";
 
 const RutaProtegidaConCheck = ({ children }) => {
   const { usuario } = useAuth();
@@ -60,6 +61,15 @@ function App() {
           element={
             <PrivateRoute>
               <EstadoAnimo />
+            </PrivateRoute>
+          }
+        />
+        {/* ✅ Ruta nueva para seleccionar prendas */}
+        <Route
+          path="/seleccion-prendas/:categoria"
+          element={
+            <PrivateRoute>
+              <SeleccionPrendas />
             </PrivateRoute>
           }
         />
