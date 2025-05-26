@@ -113,6 +113,9 @@ Proyecto desarrollado como parte del trabajo de grado de ingeniería en sistemas
 
 > **Título**: _Desarrollo de un prototipo de aplicación web para la implementación de un sistema de recomendación de ropa basado en el bienestar emocional del usuario mediante la integración de la economía conductual._
 
+**Desarrolladores**:
+- Diego Llanos  
+- Jordi Ledesma
 ---
 
 ## 🛡️ Licencia
