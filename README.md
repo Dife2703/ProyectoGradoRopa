@@ -44,8 +44,9 @@ Este proyecto es un prototipo de aplicación web que permite recomendar ropa bas
 ✅ Selección de múltiples prendas  
 ✅ Guardado de prendas seleccionadas en Firestore  
 ✅ Autenticación de usuario con Firebase  
-✅ Responsive y diseño con Tailwind
-✅ Recomendaciones basadas en el estado emocional (economía conductual)
+✅ Responsive y diseño con Tailwind  
+✅ Recomendaciones basadas en el estado emocional (economía conductual)  
+✅ Formulario de captura emocional mediante cámara para generar recomendaciones personalizadas de ropa
 
 ---
 
