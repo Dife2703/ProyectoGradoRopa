@@ -38,13 +38,14 @@ Este proyecto es un prototipo de aplicación web que permite recomendar ropa bas
 
 ## 🧠 Funcionalidades Actuales
 
-✅ Selección de categoría de prenda (camiseta, camisa, abrigo, etc.)  
+✅ Selección de categoría de prenda (camiseta, camisa, top, pantalones, short, falda/vestido, abrigo)  
 ✅ Visualización de imágenes según categoría desde el CSV  
 ✅ Filtro por género (masculino/femenino + unisex)  
 ✅ Selección de múltiples prendas  
 ✅ Guardado de prendas seleccionadas en Firestore  
 ✅ Autenticación de usuario con Firebase  
 ✅ Responsive y diseño con Tailwind
+✅ Recomendaciones basadas en el estado emocional (economía conductual)
 
 ---
 
@@ -79,7 +80,6 @@ VITE_APP_ID=TU_APP_ID
 ## 🧪 Próximas Funcionalidades
 
 - 📷 Clasificación automática de ropa por imagen subida
-- 🤖 Recomendaciones basadas en el estado emocional (economía conductual)
 - 💾 Guardado de imágenes en Firebase Storage
 - 📊 Página de perfil con historial de preferencias
 
@@ -91,6 +91,12 @@ Instalación de dependencias:
 
 ```bash
 npm install
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+npm install firebase
+npm install firebase@latest
+npm install react-router-dom
+npm install papaparse
 ```
 
 Ejecutar el proyecto:
@@ -101,7 +107,7 @@ npm run dev
 
 ---
 
-## 🧠 Autor
+## 🧠 Autores
 
 Proyecto desarrollado como parte del trabajo de grado de ingeniería en sistemas:
 
