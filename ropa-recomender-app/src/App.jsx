@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
 import EstadoAnimo from "./pages/EstadoAnimo";
+import Shinder from "./pages/Shinder";
 import PrivateRoute from "./components/PrivateRoute";
 import { useAuth } from "./context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
@@ -23,7 +24,7 @@ const RutaProtegidaConCheck = ({ children }) => {
 
       if (docSnap.exists()) {
         const datos = docSnap.data();
-        if (!datos.estadoAnimo || !datos.energia || !datos.colorPreferido) {
+        if (!datos.estadoAnimo || !datos.emocionDetectada || !datos.colorPreferido) {
           navigate("/estado-animo");
         } else {
           setCompleto(true);
@@ -70,6 +71,15 @@ function App() {
           element={
             <PrivateRoute>
               <SeleccionPrendas />
+            </PrivateRoute>
+          }
+        />
+        {/* ✅ Nueva ruta de Shinder */}
+        <Route
+          path="/shinder"
+          element={
+            <PrivateRoute>
+              <Shinder />
             </PrivateRoute>
           }
         />
