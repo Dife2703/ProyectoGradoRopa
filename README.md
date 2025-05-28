@@ -115,8 +115,8 @@ Proyecto desarrollado como parte del trabajo de grado de ingeniería en sistemas
 > **Título**: _Desarrollo de un prototipo de aplicación web para la implementación de un sistema de recomendación de ropa basado en el bienestar emocional del usuario mediante la integración de la economía conductual._
 
 **Desarrolladores**:
-- Diego Llanos  
-- Jordi Ledesma
+- Diego Llanos  ([GitHub](https://github.com/Dife2703/ProyectoGradoRopa))
+- Jordi Ledesma ([GitHub](https://github.com/GeordiCode/SmartWear-AI/tree/master))
 ---
 
 ## 🛡️ Licencia
