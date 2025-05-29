@@ -1,0 +1,223 @@
+.shinder-container {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.shinder-container h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 1.5rem;
+}
+
+.shinder-card {
+  width: 320px;
+  margin: 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  cursor: default;
+  background: white;
+  padding: 0;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.shinder-card img {
+  width: 100%;
+  height: auto;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.shinder-card h3 {
+  margin: 12px 16px 4px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  text-align: center;
+}
+
+.shinder-card p {
+  margin: 0 16px 16px;
+  font-size: 16px;
+  color: #777;
+  text-align: center;
+  line-height: 1.4;
+}
+/* Indicador visual emergente (❤️ o ❌) */
+.indicador {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 130px; /* Aumenta visibilidad */
+  opacity: 0.95;
+  z-index: 10;
+  animation: fadeInOut 1s ease;
+  pointer-events: none;
+}
+
+.indicador.like {
+  right: 30px;
+  color: #ff3b3f;
+}
+
+.indicador.dislike {
+  left: 30px;
+  color: #444;
+}
+
+@keyframes fadeInOut {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Botones de acción */
+.shinder-buttons {
+  margin-top: 0rem;
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.shinder-buttons button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  padding: 10px;
+}
+
+@media (hover: hover) {
+  .shinder-buttons button:hover {
+    transform: scale(1.2);
+  }
+}
+
+/* Efecto de agrandar al tocar */
+.shinder-buttons button:active {
+  transform: scale(1.2);
+  transition: transform 0.3s ease; /* Hace que vuelva al tamaño original automáticamente */
+}
+
+.btn-like svg {
+  fill: #ff3b3f;
+  width: 100px;
+  height: 100px;
+}
+
+.btn-dislike svg {
+  stroke: #333;
+  width: 100px;
+  height: 100px;
+}
+
+/* Animaciones swipe */
+.swipe-left {
+  animation: swipeLeft 1s forwards;
+}
+
+.swipe-right {
+  animation: swipeRight 1s forwards;
+}
+
+@keyframes swipeLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+@keyframes swipeRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100%) rotate(20deg);
+    opacity: 0;
+  }
+}
+
+/* Fin de recomendaciones */
+.shinder-empty,
+.shinder-end {
+  height: 80vh; /* Ocupa la mayoría de la pantalla */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra vertical */
+  align-items: center;     /* Centra horizontal */
+  text-align: center;
+  padding: 0 1rem;
+  color: #555;
+  font-family: 'Inter', sans-serif;
+}
+
+.shinder-empty p {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #888;
+}
+
+.shinder-end h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-weight: 700;
+}
+
+.boton-enviar {
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  background-color: #ef4444;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.boton-enviar:hover {
+  background-color: #dc2626;
+}
+
+.resultado-final {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Mensaje adicional (por si se usa para feedback) */
+.mensaje-feedback {
+  position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: bold;
+  z-index: 10;
+  animation: fadeInOut 0.5s ease-in-out;
+}

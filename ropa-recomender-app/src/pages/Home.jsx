@@ -192,8 +192,8 @@ const Home = () => {
                 </div>
               ))
             ) : (
-              <p className="text-center text-gray-500 col-span-full">
-                No tienes prendas favoritas aún.
+              <p className="text-center text-gray-600 text-md col-span-full mt-4">
+                No tienes prendas favoritas aún :(
               </p>
             )}
           </div>

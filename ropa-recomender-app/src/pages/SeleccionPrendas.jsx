@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { db } from "../services/firebase";
 import { collection, doc, getDoc, addDoc } from "firebase/firestore";
+import { query, where, getDocs, setDoc } from "firebase/firestore";
 import { useAuth } from "../context/AuthContext";
 
 const shuffleArray = (array) => {
@@ -97,8 +98,16 @@ const SeleccionPrendas = () => {
     try {
       const ref = collection(db, "usuarios", usuario.email, "preferencias");
       for (const prenda of seleccionadas) {
-        await addDoc(ref, prenda);
+      const prendaRef = doc(ref, prenda.id); // usa el ID de la prenda como clave
+      const docSnap = await getDoc(prendaRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(prendaRef, prenda); // solo guarda si no existe
+        console.log(`✅ Guardada prenda: ${prenda.productDisplayName}`);
+      } else {
+        console.log(`⏭️ Prenda ya existente: ${prenda.productDisplayName}`);
       }
+    }
 
       const response = await fetch("http://localhost:8000/api/tinder-recommendation", {
         method: "POST",
@@ -114,7 +123,7 @@ const SeleccionPrendas = () => {
 
       const data = await response.json();
       if (response.ok && data.recommendations) {
-        alert("Preferencias guardadas localmente y enviadas al backend");
+        //alert("Preferencias guardadas localmente y enviadas al backend");
         navigate("/shinder", {
           state: {
             recomendaciones: data.recommendations,

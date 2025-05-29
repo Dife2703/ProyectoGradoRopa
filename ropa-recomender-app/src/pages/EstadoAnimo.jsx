@@ -260,7 +260,7 @@ const EstadoAnimo = () => {
 
         <button
           type="submit"
-          className="w-full bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-blue-700 transition"
+          className="w-full bg-red-500 text-white py-3 rounded-xl font-semibold hover:bg-red-700 transition"
         >
           Continuar
         </button>
