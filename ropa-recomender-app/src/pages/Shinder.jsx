@@ -57,7 +57,7 @@ const Shinder = () => {
   if (!recomendaciones.length) return <p>No hay recomendaciones para mostrar.</p>;
   if (indice >= recomendaciones.length) {
     return (
-      <div style={{ textAlign: "center", marginTop: "2rem" }}>
+      <div style={{ textAlign: "center", marginTop: "4rem" }}>
         <h2>¡Has visto todas las recomendaciones!</h2>
         <button
           onClick={enviarLikesAlBackend}
@@ -72,7 +72,7 @@ const Shinder = () => {
   const actual = recomendaciones[indice];
 
   return (
-    <div style={{ textAlign: "center", marginTop: "2rem" }}>
+    <div style={{ textAlign: "center", marginTop: "4rem" }}>
       <h2>¿Te gusta esta prenda?</h2>
       <img
         src={actual.link}

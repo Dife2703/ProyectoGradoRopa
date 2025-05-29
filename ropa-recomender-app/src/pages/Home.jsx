@@ -7,7 +7,7 @@ import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
 
 const Home = () => {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [view, setView] = useState("categorias"); // "categorias" o "favoritos"
+  const [view, setView] = useState("categorias");
   const [favoritos, setFavoritos] = useState([]);
 
   const navigate = useNavigate();
@@ -79,73 +79,55 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-purple-50 p-6 flex flex-col">
+    <div className="pt-5 min-h-screen bg-gray-50 bg-amber-50 p-6 flex flex-col">
       {/* Header */}
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <h1 className="text-3xl font-bold text-red-500">
           ¿Qué tipo de prenda buscas hoy?
         </h1>
-        <div className="flex gap-4">
-          <button
-            onClick={() => navigate("/estado-animo")}
-            className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600"
-          >
-            Repetir Test
-          </button>
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-          >
-            Cerrar sesión
-          </button>
-        </div>
       </div>
 
-      {/* Botones de vista con efecto sliding */}
-      {/* Botones de vista con efecto sliding más suave y espaciado */}
-      <div className="relative flex justify-center gap-0 mb-6 rounded-md" style={{ width: "fit-content", margin: "0 auto", top: 0 }}>
-      {/* Slider rojo */}
-      <div
-        className="absolute top-0.5 bottom-0.5 bg-red-500 rounded-md transition-all duration-300 ease-in-out"
-        style={{
-          left: sliderStyle.left ? `calc(${sliderStyle.left} + 4px)` : 0,
-          width: sliderStyle.width ? `calc(${sliderStyle.width} - 8px)` : "0px",
-          zIndex: 0,
-        }}
-      />
-
-      <button
-        ref={categoriasRef}
-        style={{ width: "120px" }}
-        className={`relative z-10 px-6 py-2 rounded-md font-medium transition-colors duration-300 ${
-          view === "categorias" ? "text-white" : "text-gray-700"
-        }`}
-        onClick={() => setView("categorias")}
-      >
-        Categorías
-      </button>
-      <button
-        ref={favoritosRef}
-        style={{ width: "120px" }}
-        className={`relative z-10 px-6 py-2 rounded-md font-medium transition-colors duration-300 ${
-          view === "favoritos" ? "text-white" : "text-gray-700"
-        }`}
-        onClick={() => setView("favoritos")}
-      >
-        Favoritos
-      </button>
-    </div>
+      {/* Botones de vista */}
+      <div className="relative flex justify-center gap-0 mb-6 rounded-md" style={{ width: "fit-content", margin: "0 auto", top: -10 }}>
+        <div
+          className="absolute top-0.5 bottom-0.5 bg-red-500 rounded-md transition-all duration-300 ease-in-out"
+          style={{
+            left: sliderStyle.left ? `calc(${sliderStyle.left} + 4px)` : 0,
+            width: sliderStyle.width ? `calc(${sliderStyle.width} - 8px)` : "0px",
+            zIndex: 0,
+          }}
+        />
+        <button
+          ref={categoriasRef}
+          style={{ width: "120px" }}
+          className={`relative z-10 px-6 py-2 rounded-md font-medium transition-colors duration-300 ${
+            view === "categorias" ? "text-white" : "text-gray-700"
+          }`}
+          onClick={() => setView("categorias")}
+        >
+          Categorías
+        </button>
+        <button
+          ref={favoritosRef}
+          style={{ width: "120px" }}
+          className={`relative z-10 px-6 py-2 rounded-md font-medium transition-colors duration-300 ${
+            view === "favoritos" ? "text-white" : "text-gray-700"
+          }`}
+          onClick={() => setView("favoritos")}
+        >
+          Favoritos
+        </button>
+      </div>
 
       {/* Contenido */}
       {view === "categorias" ? (
         <>
-          <h2 className="text-xl font-semibold mb-4 text-center"></h2>
-          <div className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-2 mb-8 w-full">
+          <div className="pt-3 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 lg:gap-[10px] mb-6 w-full">
             {categories.map((item) => (
               <button
                 key={item.name}
                 onClick={() => handleCategorySelect(item.value)}
-                className={`p-1 rounded-lg border-2 transition-transform duration-300 hover:scale-105 w-full ${
+                className={`p-1 rounded-lg border-2 transition-transform rounded-xl bg-white duration-300 hover:scale-105 w-full lg:gap-[2px] ${
                   selectedCategory === item.value ? "border-red-500" : "border-transparent"
                 }`}
               >
@@ -162,7 +144,7 @@ const Home = () => {
           <div className="flex justify-center">
             <button
               onClick={handleContinue}
-              className="-mt-7 bg-pink-500 hover:bg-pink-600 text-white font-semibold px-6 py-3 rounded-full"
+              className="-mt-7 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg"
             >
               Siguiente
             </button>
@@ -170,26 +152,42 @@ const Home = () => {
         </>
       ) : (
         <>
-          <h2 className="text-xl font-semibold mb-4 text-center"></h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-8 w-full">
+          <div className="pt-3 grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 lg:gap-2 mb-8 w-full">
             {favoritos.length > 0 ? (
               favoritos.map((prenda) => (
-                <div key={prenda.firestoreId} className="border rounded-lg p-2 relative">
+                <div
+                  key={prenda.firestoreId}
+                  className="p-1 rounded-lg border-2 transition-transform bg-white duration-300 hover:scale-105 w-full border-transparent relative"
+                >
                   <img
                     src={prenda.link}
                     alt={prenda.productDisplayName || "Prenda"}
                     className="w-full aspect-square object-cover rounded-md"
                   />
-                  <p className="text-sm mt-2 text-center font-semibold">
-                    {prenda.productDisplayName}
-                  </p>
+                  <p className="text-sm mt-1 text-center">{prenda.productDisplayName}</p>
+
+                  {/* BOTÓN DE ELIMINAR EN ESQUINA INFERIOR DERECHA DE LA TARJETA */}
                   <button
                     onClick={() => eliminarFavorito(prenda.firestoreId)}
-                    className="absolute top-2 right-2 text-red-600 text-xl hover:text-red-800"
+                    className="absolute top-0 right-0 sm:top-1 sm:right-1 w-12 h-12 text-2xl flex items-center justify-center text-red-600 hover:text-red-800 z-10"
                     aria-label="Eliminar favorito"
                     title="Eliminar favorito"
                   >
-                    🗑️
+
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="w-8 h-8 sm:w-11 sm:h-11 md:w-12 md:h-12 transition-all duration-200"
+                    >
+                      <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                      <path d="m12 13-1-1 2-2-3-3 2-2"/>
+                    </svg>
+
                   </button>
                 </div>
               ))

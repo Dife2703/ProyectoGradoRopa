@@ -10,6 +10,7 @@ import { useAuth } from "./context/AuthContext";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./services/firebase";
 import SeleccionPrendas from "./pages/SeleccionPrendas";
+import Layout from "./components/Layout";
 
 const RutaProtegidaConCheck = ({ children }) => {
   const { usuario } = useAuth();
@@ -52,7 +53,9 @@ function App() {
           element={
             <PrivateRoute>
               <RutaProtegidaConCheck>
+                <Layout>
                 <Home />
+                </Layout>
               </RutaProtegidaConCheck>
             </PrivateRoute>
           }
@@ -61,7 +64,9 @@ function App() {
           path="/estado-animo"
           element={
             <PrivateRoute>
+              <Layout>
               <EstadoAnimo />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -70,7 +75,9 @@ function App() {
           path="/seleccion-prendas/:categoria"
           element={
             <PrivateRoute>
+              <Layout>
               <SeleccionPrendas />
+              </Layout>
             </PrivateRoute>
           }
         />
@@ -79,7 +86,9 @@ function App() {
           path="/shinder"
           element={
             <PrivateRoute>
+              <Layout>
               <Shinder />
+              </Layout>
             </PrivateRoute>
           }
         />
