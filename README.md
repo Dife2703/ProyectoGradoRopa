@@ -42,21 +42,24 @@ ROPA-RECOMENDER-APP/
 
 ## 🧠 Funcionalidades Actuales
 
-✅ Selección de categoría de prenda (camiseta, camisa, top, pantalones, short, falda/vestido, abrigo)  
-✅ Visualización de imágenes según categoría desde el CSV  
-✅ Filtro por género (masculino/femenino + unisex)  
-✅ Selección de múltiples prendas  
-✅ Guardado de prendas seleccionadas en Firestore  
-✅ Autenticación de usuario con Firebase  
-✅ Responsive y diseño con Tailwind  
-✅ Recomendaciones basadas en el estado emocional (economía conductual)  
-✅ Formulario de captura emocional mediante cámara para generar recomendaciones personalizadas de ropa
-✅ Sistema de recomendación estilo Tinder: desliza prendas con animaciones al dar Like ❤️ o Dislike ❌
-✅ Control de múltiples clics: prevención de conteo duplicado al hacer spam en los botones
-✅ Indicadores visuales animados: íconos grandes (❤️ y ❌) al dar like/dislike
-✅ Animaciones suaves entre tarjetas y precarga de imágenes para transición fluida
-✅ Pantalla final con GIF aleatorio y llamado a llenar un formulario de satisfacción (Google Forms)
-✅ Registro de usuarios que ya llenaron el formulario para no volver a mostrarlo
+- ✅ Selección de categoría de prenda (camiseta, camisa, top, pantalones, short, falda/vestido, abrigo)
+- ✅ Visualización de imágenes según categoría desde el CSV
+- ✅ Filtro por género (masculino/femenino + unisex)
+- ✅ Selección de múltiples prendas
+- ✅ Guardado de prendas seleccionadas en Firestore
+- ✅ Autenticación de usuario con Firebase
+- ✅ Responsive y diseño con Tailwind CSS
+- ✅ Recomendaciones basadas en el estado emocional (economía conductual)
+- ✅ Formulario de captura emocional mediante cámara para generar recomendaciones personalizadas de ropa
+
+## 🔄 Funcionalidades Adicionales
+
+- ✅ Sistema de recomendación estilo Tinder: desliza prendas con animaciones al dar Like ❤️ o Dislike ❌
+- ✅ Control de múltiples clics: prevención de conteo duplicado al hacer spam en los botones
+- ✅ Indicadores visuales animados: íconos grandes (❤️ y ❌) al dar like/dislike
+- ✅ Animaciones suaves entre tarjetas y precarga de imágenes para transición fluida
+- ✅ Pantalla final con GIF aleatorio y llamado a llenar un formulario de satisfacción (Google Forms)
+- ✅ Registro de usuarios que ya llenaron el formulario para no volver a mostrarlo
 
 ---
 
