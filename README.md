@@ -16,37 +16,50 @@ Este proyecto es un prototipo de aplicación web que permite recomendar ropa bas
 ## 📁 Estructura del Proyecto
 
 ```
-/public
-  └── /data
-      └── prendas.csv       # Dataset de prendas
-
-/src
-  ├── /components
-  ├── /context
-      └── AuthContext.jsx   # Contexto de usuario autenticado
-  ├── /pages
-      ├── Home.jsx          # Pantalla principal
-      ├── SeleccionPrendas.jsx # Página para elegir prendas por categoría
-  ├── /services
-      └── firebase.js       # Configuración de Firebase
-  ├── /utils
-      └── categories.js     # Lista de categorías con imagen y nombre
-  └── App.jsx               # Rutas principales
+ROPA-RECOMENDER-APP/
+├── public/
+│   └── data/
+│       └── prendas.csv     # Dataset de prendas
+│
+├── models/                 # Modelos de detección facial y emociones
+├── src/
+│   ├── assets/
+│   ├── components/         # Componentes reutilizables (Navbar, Layout, PrivateRoute)
+│   ├── context/            # Contexto de autenticación
+│   ├── pages/              # Páginas principales (Login, Registro, Home, Shinder, etc.)
+│   ├── services/           # Configuración de Firebase
+│   ├── styles/             # Estilos CSS
+│   └── utils/              # Funciones auxiliares (lectura CSV, categorías)
+│
+├── App.jsx                 # Punto de entrada principal
+├── index.html
+├── package.json
+├── vite.config.js
+└── README.md
 ```
 
 ---
 
 ## 🧠 Funcionalidades Actuales
 
-✅ Selección de categoría de prenda (camiseta, camisa, top, pantalones, short, falda/vestido, abrigo)  
-✅ Visualización de imágenes según categoría desde el CSV  
-✅ Filtro por género (masculino/femenino + unisex)  
-✅ Selección de múltiples prendas  
-✅ Guardado de prendas seleccionadas en Firestore  
-✅ Autenticación de usuario con Firebase  
-✅ Responsive y diseño con Tailwind  
-✅ Recomendaciones basadas en el estado emocional (economía conductual)  
-✅ Formulario de captura emocional mediante cámara para generar recomendaciones personalizadas de ropa
+- ✅ Selección de categoría de prenda (camiseta, camisa, top, pantalones, short, falda/vestido, abrigo)
+- ✅ Visualización de imágenes según categoría desde el CSV
+- ✅ Filtro por género (masculino/femenino + unisex)
+- ✅ Selección de múltiples prendas
+- ✅ Guardado de prendas seleccionadas en Firestore
+- ✅ Autenticación de usuario con Firebase
+- ✅ Responsive y diseño con Tailwind CSS
+- ✅ Recomendaciones basadas en el estado emocional (economía conductual)
+- ✅ Formulario de captura emocional mediante cámara para generar recomendaciones personalizadas de ropa
+
+## 🔄 Funcionalidades Adicionales
+
+- ✅ Sistema de recomendación estilo Tinder: desliza prendas con animaciones al dar Like ❤️ o Dislike ❌
+- ✅ Control de múltiples clics: prevención de conteo duplicado al hacer spam en los botones
+- ✅ Indicadores visuales animados: íconos grandes (❤️ y ❌) al dar like/dislike
+- ✅ Animaciones suaves entre tarjetas y precarga de imágenes para transición fluida
+- ✅ Pantalla final con GIF aleatorio y llamado a llenar un formulario de satisfacción (Google Forms)
+- ✅ Registro de usuarios que ya llenaron el formulario para no volver a mostrarlo
 
 ---
 
@@ -78,11 +91,10 @@ VITE_APP_ID=TU_APP_ID
 
 ---
 
-## 🧪 Próximas Funcionalidades
+## 🧪 Próximas Funcionalidades Pensadas
 
 - 📷 Clasificación automática de ropa por imagen subida
 - 💾 Guardado de imágenes en Firebase Storage
-- 📊 Página de perfil con historial de preferencias
 
 ---
 
@@ -98,6 +110,7 @@ npm install firebase
 npm install firebase@latest
 npm install react-router-dom
 npm install papaparse
+npm install -g firebase-tools
 ```
 
 Ejecutar el proyecto:
