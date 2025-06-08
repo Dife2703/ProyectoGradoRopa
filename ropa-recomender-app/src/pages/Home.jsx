@@ -144,7 +144,7 @@ const Home = () => {
           <div className="flex justify-center">
             <button
               onClick={handleContinue}
-              className="-mt-7 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-3 rounded-lg"
+              className="-mt-7 bg-red-500 hover:bg-red-600 text-white font-semibold px-6 py-2 rounded-lg"
             >
               Siguiente
             </button>

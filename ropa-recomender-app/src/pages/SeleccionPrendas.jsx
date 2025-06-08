@@ -57,7 +57,7 @@ const SeleccionPrendas = () => {
 
   useEffect(() => {
     if (!genero || !emocion) return;
-    const url = `http://localhost:8000/api/recommendations/${emocion}?categoria=${normalizarCategoria(categoria)}&gender=${genero}`;
+    const url = `https://smartwear-ai-backend-2.onrender.com/api/recommendations/${emocion}?categoria=${normalizarCategoria(categoria)}&gender=${genero}`;
 
     fetch(url)
       .then((res) => res.json())
@@ -109,7 +109,7 @@ const SeleccionPrendas = () => {
       }
     }
 
-      const response = await fetch("http://localhost:8000/api/tinder-recommendation", {
+      const response = await fetch("https://smartwear-ai-backend-2.onrender.com/api/tinder-recommendation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

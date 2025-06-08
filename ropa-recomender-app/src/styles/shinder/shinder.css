@@ -1,7 +1,32 @@
+
 .shinder-container {
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  min-height: 100vh;
+  overflow-y: auto; /* <--- Esto permite scroll si el contenido se desborda */
+  box-sizing: border-box;
+  background-color: #f9fafb; /* o el color que uses */
 }
+
+
+
+.shinder-end {
+  margin-top: 3rem; 
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow-y: visible;
+}
+
+
+
 
 .shinder-container h2 {
   font-size: 24px;
@@ -54,7 +79,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 130px; /* Aumenta visibilidad */
+  font-size: 120px; /* Aumenta visibilidad */
   opacity: 0.95;
   z-index: 10;
   animation: fadeInOut 1s ease;
@@ -220,4 +245,62 @@
   font-weight: bold;
   z-index: 10;
   animation: fadeInOut 0.5s ease-in-out;
+}
+
+
+
+
+
+
+
+
+
+.formulario-feedback {
+  margin-top: 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInOut 0.8s ease-in;
+}
+
+.gif-feedback {
+  width: 320px;
+  max-width: 90%;
+  height: auto;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.boton-formulario,
+.boton-ya-llene {
+  width: 250px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 0.5rem 0;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.boton-formulario {
+  background-color: #2196f3;
+  color: white;
+}
+
+.boton-formulario:hover {
+  background-color: #1976d2;
+}
+
+.boton-ya-llene {
+  background-color: #4caf50;
+  color: white;
+}
+
+.boton-ya-llene:hover {
+  background-color: #388e3c;
 }

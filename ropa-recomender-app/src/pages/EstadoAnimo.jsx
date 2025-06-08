@@ -64,6 +64,7 @@ const EstadoAnimo = () => {
   const [showPopup, setShowPopup] = useState(false);
   const videoRef = useRef(null);
   const navigate = useNavigate();
+  const popupTimeoutRef = useRef(null);
 
   useEffect(() => {
     const loadModels = async () => {
@@ -98,9 +99,16 @@ const EstadoAnimo = () => {
         setEstadoAnimo(emotion);
         setShowPopup(true);
 
-        setTimeout(() => {
+        // Limpiar timeout anterior si existe
+        if (popupTimeoutRef.current) {
+          clearTimeout(popupTimeoutRef.current);
+        }
+
+        // Crear nuevo timeout
+        popupTimeoutRef.current = setTimeout(() => {
           setShowPopup(false);
-        }, 4000);
+          popupTimeoutRef.current = null;
+        }, 8000);
       } else {
         alert("No se detectó ninguna cara, intenta de nuevo.");
       }
@@ -147,25 +155,24 @@ const EstadoAnimo = () => {
           className="w-full max-w-xs h-auto rounded-lg bg-black mb-5"
         />
 
-        <div className="flex flex-wrap gap-4 justify-center w-full">
+        <div className="flex flex-wrap gap-4 justify-center w-full sm:flex-row flex-col items-center">
           <button
             onClick={startCamera}
-            className="flex-1 min-w-[140px] bg-red-500 text-white px-5 py-3 rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2 whitespace-nowrap"
+            className="w-full sm:w-auto bg-red-500 text-white px-5 py-3 rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2"
           >
             Activar Cámara{" "}
             <span
               className="inline-flex items-center leading-none relative text-xl sm:text-3xl"
-              style={{ top: '-4px' }} // 1px más abajo que antes
+              style={{ top: '-4px' }}
             >
               📷
             </span>
           </button>
           <button
             onClick={detectEmotion}
-            className="flex-1 min-w-[140px] text-white px-5 py-3 rounded-lg transition flex items-center justify-center gap-2 whitespace-nowrap sm:px-5 bg-gray-500 hover:bg-gradient-to-r hover:from-pink-400 hover:via-purple-400 hover:to-indigo-500"
-            // px-6 para móvil (más a la derecha), sm:px-5 para escritorio que vuelva a 5
+            className="w-full sm:w-auto text-white px-5 py-3 rounded-lg transition flex items-center justify-center gap-2 bg-gray-500 hover:bg-gradient-to-r hover:from-pink-400 hover:via-purple-400 hover:to-indigo-500"
           >
-            Detectar Emoción{""}
+            Detectar Emoción{" "}
             <span
               className="inline-flex items-center leading-none relative text-xl sm:text-3xl"
               style={{ top: '-1px' }}

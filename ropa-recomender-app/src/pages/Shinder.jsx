@@ -15,9 +15,26 @@ const Shinder = () => {
   const [likes, setLikes] = useState([]);
   const [animacion, setAnimacion] = useState("");
   const [indicador, setIndicador] = useState(null);
+  const [formularioLlenado, setFormularioLlenado] = useState(false);
+  const [bloqueado, setBloqueado] = useState(false);
 
   const cardRef = useRef(null);
   const startX = useRef(null);
+
+  
+
+  const gifs = [
+  "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWp3ZTV1eDF1bm40aGVpN3pzajJndDFneXQ3NW05bTQ5djNpZGN0eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/s0kLsuucleKE7CDb6W/giphy.gif",
+  "https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExZWV2d2QwMzBndXZsbXlmaHM5c3pmY3RrajlhM2N5dThsMTFscTNhaiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/NKPUJzeCNsUiiOopAk/giphy.gif",
+  "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExMWc3MGZjeWh5eHZvZnFxczYxb2FtOWxsam9pN3h0MHNtY3R5Ym9tdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/l41Ypc6k7m6p3vXuU/giphy.gif",
+  "https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExdGNydTJuMWxrbHY1cHl1MjRoZGs4dTBtbm92MWJneHlrbGxva3JidSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/eNCT1AS48GvM98DCXk/giphy.gif",
+  "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTlpOTBoNmltNHlwcmdlZTM1NW5jZGI4M2pzY3VvYno4a2E3MzhjbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/YZOsKxJfmvzG0/giphy.gif",
+  "https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExdXYxNHZuZDRmOTN4aTZqd20xMTBpZ2QwdDBmZnJ1anc0Ym9teGVtcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CPlkqEvq8gRDW/giphy.gif"
+  ];
+
+  const gifAleatorio = gifs[Math.floor(Math.random() * gifs.length)];
+
+  
 
   useEffect(() => {
     if (indice + 1 < recomendaciones.length) {
@@ -26,7 +43,47 @@ const Shinder = () => {
     }
   }, [indice, recomendaciones]);
 
+  useEffect(() => {
+    const verificarFormularioLlenado = async () => {
+      if (!usuario?.email) return;
+
+      try {
+        const usuarioDocRef = doc(db, "usuarios", usuario.email);
+        const snap = await getDoc(usuarioDocRef);
+        if (snap.exists()) {
+          const data = snap.data();
+          if (data.formularioLlenado) {
+            setFormularioLlenado(true);
+          }
+        }
+      } catch (error) {
+        console.error("Error al verificar si ya llenó el formulario:", error);
+      }
+    };
+
+    verificarFormularioLlenado();
+  }, [usuario]);
+
+  const marcarFormularioComoLlenado = async () => {
+    try {
+      if (!usuario?.email) {
+        alert("Debes estar autenticado para registrar el formulario");
+        return;
+      }
+
+      const usuarioDocRef = doc(db, "usuarios", usuario.email);
+      await setDoc(usuarioDocRef, { formularioLlenado: true }, { merge: true });
+
+      setFormularioLlenado(true);
+    } catch (error) {
+      console.error("Error al marcar el formulario como llenado:", error);
+    }
+  };
+
   const handleDecision = (gusto) => {
+    if (bloqueado) return; // Previene múltiples clicks
+    setBloqueado(true);
+
     const anim = gusto ? "swipe-right" : "swipe-left";
     const icon = gusto ? "❤️" : "❌";
 
@@ -38,12 +95,13 @@ const Shinder = () => {
       setIndice((prev) => prev + 1);
       setAnimacion("");
       setIndicador(null);
+      setBloqueado(false);
     }, 850); // más duración para que se vea la animación
   };
 
   const enviarLikesAlBackend = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/tinder-feedback-batch", {
+      const response = await fetch("https://smartwear-ai-backend-2.onrender.com/api/tinder-feedback-batch", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ emotion, likes }),
@@ -100,7 +158,7 @@ const Shinder = () => {
       }
 
       // Enviar al backend
-      const response = await fetch("http://localhost:8000/api/tinder-feedback-batch", {
+      const response = await fetch("https://smartwear-ai-backend-2.onrender.com/api/tinder-feedback-batch", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ emotion, likes }),
@@ -139,6 +197,26 @@ const Shinder = () => {
         <p className="resultado-final">
           {emoji} Te gustaron {gustadas} de {total} prendas.
         </p>
+
+        {!formularioLlenado && (
+          <div className="formulario-feedback">
+            <img src={gifAleatorio} alt="gif gracioso" className="gif-feedback" />
+            <p>¿Qué te pareció nuestra app? Por favor, llena este formulario. ¡Solo te tomará un minuto!</p>
+            <a
+              href="https://forms.gle/2aMwt6zWPTAZa4YSA"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="boton-formulario"
+            >
+              Ir al formulario ✍️
+            </a>
+            <button onClick={marcarFormularioComoLlenado} className="boton-ya-llene">
+              Ya llené el formulario ✅
+            </button>
+            <p>No olvides enviar las prendas que te gustaron!</p>
+          </div>
+        )}
+
         <button onClick={guardarPreferencias} className="boton-enviar">
           Enviar prendas que me gustaron
         </button>
@@ -159,7 +237,7 @@ const Shinder = () => {
         onMouseUp={handleMouseUp}
       >
         {indicador && (
-          <div className={indicador === "❤️" ? "like" : "dislike"}>
+          <div className={`indicador ${indicador === "❤️" ? "like" : "dislike"}`}>
             {indicador}
           </div>
         )}
@@ -169,12 +247,12 @@ const Shinder = () => {
       </div>
 
       <div className="shinder-buttons">
-        <button className="btn-dislike" onClick={() => handleDecision(false)}>
+        <button className="btn-dislike" onClick={() => handleDecision(false)} disabled={bloqueado} >
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
             <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
-        <button className="btn-like" onClick={() => handleDecision(true)}>
+        <button className="btn-like" onClick={() => handleDecision(true)} disabled={bloqueado}>
           <svg width="32" height="32" viewBox="0 0 24 24" fill="#fff">
             <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 
               2 5.42 4.42 3 7.5 3c1.74 0 3.41 0.81 

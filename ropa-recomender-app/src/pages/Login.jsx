@@ -1,10 +1,12 @@
 
 import { useState } from "react";
-import { auth } from "../services/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth, googleProvider, db } from "../services/firebase";
+import { signInWithEmailAndPassword,  signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { useNavigate, Link } from "react-router-dom";
 import { EnvelopeIcon, LockClosedIcon, EyeIcon, EyeSlashIcon, } from "@heroicons/react/24/outline";
 import fondo from "../assets/fondo.jpg";
+import googleLogo from "../assets/g-logo.png";
 
 
 export default function Login() {
@@ -13,6 +15,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const googleProvider = new GoogleAuthProvider();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -21,6 +24,28 @@ export default function Login() {
       navigate("/");
     } catch (err) {
       setError("Correo o contraseña incorrectos.");
+    }
+  };
+
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      const userDocRef = doc(db, "usuarios", user.email);
+      const docSnap = await getDoc(userDocRef);
+
+      if (!docSnap.exists()) {
+        await setDoc(userDocRef, {
+          email: user.email,
+          estadoAnimo: "",
+          preferencias: [],
+        });
+      }
+
+      navigate("/");
+    } catch (error) {
+      setError(error.message);
     }
   };
 
@@ -98,6 +123,21 @@ export default function Login() {
         >
           Entrar
         </button>
+        
+        {/* Google login button */}
+        <div className="mt-4">
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            className="w-full flex items-center justify-center gap-3 border border-gray-300 bg-white py-2 rounded-md hover:shadow-md transition duration-200"
+          >
+            <img src={googleLogo} alt="Google" className="w-5 h-5" />
+            <span className="text-sm text-gray-700 font-medium">
+              Iniciar sesión con Google
+            </span>
+          </button>
+        </div>
+
 
         <p className="text-sm text-center mt-6 text-gray-700">
           ¿No tienes una cuenta?{" "}
