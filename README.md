@@ -129,7 +129,7 @@ Proyecto desarrollado como parte del trabajo de grado de ingeniería en sistemas
 
 **Desarrolladores**:
 - Diego Llanos  ([GitHub](https://github.com/Dife2703/ProyectoGradoRopa))
-- Jordi Ledesma ([GitHub](https://github.com/GeordiCode/SmartWear-AI/tree/master))
+- Jordi Ledesma ([GitHub](https://github.com/GeordiCode/SmartWear-AI-backend))
 ---
 
 ## 🛡️ Licencia
